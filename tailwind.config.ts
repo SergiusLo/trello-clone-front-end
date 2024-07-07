@@ -1,7 +1,6 @@
-import { COLORS } from '@/constants/color.constans'
 import type { Config } from 'tailwindcss'
 
-
+import { COLORS } from './src/constants/color.constans'
 
 const config: Config = {
 	darkMode: 'class',
