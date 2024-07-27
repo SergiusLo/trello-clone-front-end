@@ -1,0 +1,21 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
+import { TypeTaskFormState } from '@/types/task.types'
+
+import { taskService } from '@/services/task.service'
+
+export function useUpdateTasks(key?: string) {
+	const QueryClient = useQueryClient()
+
+	const { mutate: updateTask } = useMutation({
+		mutationKey: ['update tasks', key],
+		mutationFn: ({ id, data }: { id: string; data: TypeTaskFormState }) =>
+			taskService.updateTask(id, data),
+
+		onSuccess: () => {
+			QueryClient.invalidateQueries({ queryKey: ['tasks'] })
+		}
+	})
+
+	return {updateTask}
+}
